@@ -146,7 +146,7 @@ def recorrer_carpetas_y_extraer_pdfs(ruta):
         print("\nTodos los archivos PDF tienen texto seleccionable.")
 
 # Leer el archivo de rutas desde el Excel 
-ruta_excel = r'C:\Users\user\Desktop\P_SCRIP\Em-ordenes-serv\rutas.xlsx'
+ruta_excel = r'rutas.xlsx'
 rutas_df = pd.read_excel(ruta_excel, header=None)  # Cargar el Excel sin encabezados
 
 # Obtener las rutas desde el Excel por indices
@@ -154,8 +154,8 @@ ruta_principal = rutas_df.iloc[1, 0]
 ruta_descarga_excel = rutas_df.iloc[2, 0]  # Fila 3, Columna A (index 2, 0)
 
 # Ruta del archivo Excel con las sociedades y nuevos nombres
-ruta_sociedades =  r'C:\Users\user\Desktop\P_SCRIP\Em-ordenes-serv\Sociedades.xlsx'  
-ruta_nuevos_nombres = r'C:\Users\user\Desktop\P_SCRIP\Em-ordenes-serv\Nuevos nombres.xlsx' 
+ruta_sociedades =  r'Sociedades.xlsx'  
+ruta_nuevos_nombres = r'Nuevos nombres.xlsx' 
 
 # Leer los archivos Excel
 try:
