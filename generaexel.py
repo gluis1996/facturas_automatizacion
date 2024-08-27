@@ -34,7 +34,7 @@ def limpiar_y_convertir(cadena):
         return None  # O algún valor por defecto o lanzar una excepción
     
 
-hojaDatos = openpyxl.load_workbook('C:\\Users\\user\\Desktop\\P_SCRIP\\Em-ordenes-serv\\90 Excel Config.xlsx')
+hojaDatos = openpyxl.load_workbook('90 Excel Config.xlsx')
 workSheet = hojaDatos.active
 
 listaFacturas = []
@@ -340,7 +340,6 @@ def leerGrupoArticulo():
         dataFrameFacturas.loc[index, 'Servicio'] = ''
         dataFrameFacturas.loc[index, 'CECO'] = ''
 
-
     for index, fila in dataFrameFacturas.iterrows():
         for index2, fila2 in dataFrameGrupo.iterrows():
             # print(fila2['DETALLE'])
@@ -349,12 +348,12 @@ def leerGrupoArticulo():
                 detalleAuxiliar = ''.join(detalleAuxiliar[:-1])
 
                 detalleAuxuliarGrupo = str(fila2['DETALLE']).replace(' ', '')
-                # detalleAuxuliarGrupo = ''.join(detalleAuxuliarGrupo[:-])
-                
-                # print(detalleAuxiliar, detalleAuxuliarGrupo)
-                # print(detalleAuxiliar, detalleAuxuliarGrupo, index2, fila['Sociedad'], fila2['Codigo de Sociedad'])
+                detalleAuxuliarGrupo = ''.join(detalleAuxuliarGrupo)
+
+                print(detalleAuxiliar, detalleAuxuliarGrupo)
+                print(detalleAuxiliar, detalleAuxuliarGrupo, index2, fila['Sociedad'], fila2['Codigo de Sociedad'])
                 if detalleAuxiliar == detalleAuxuliarGrupo:
-            # fila['Detalle'].startswith(fila2['DETALLE']) a:
+                    fila['Detalle'].startswith(fila2['DETALLE'])
                     dataFrameFacturas.loc[index, 'Grupo Articulo'] = fila2['Grupo Artículo']
                     dataFrameFacturas.loc[index, 'Codigo de Grupo Articulo'] = fila2['Código de Grupo Artículo']
                     dataFrameFacturas.loc[index, 'Centro'] = fila2['Centro']
@@ -362,15 +361,14 @@ def leerGrupoArticulo():
                     dataFrameFacturas.loc[index, 'Servicio'] = fila2['Servicio']
                     dataFrameFacturas.loc[index, 'CECO'] = fila2['CECO']
 
-    print(dataFrameFacturas)
     #####################################
     print(dataFrameFacturas)
-    dataFrameFacturas.to_excel(rutaRepositorioOS + '11 Generado\\Facturas.xlsx', index=False)
+    # dataFrameFacturas.to_excel(rutaRepositorioOS + '11 Generado\\Facturas.xlsx', index=False)
 
-# dataFrameNuevosNombres = leerNuevosNombres()
+dataFrameNuevosNombres = leerNuevosNombres()
 dataFrameFacturas = leerCarpetas()
 dataFrameFacturasMAPFRE = leerCarpetaMAPFRE()
-# dataFrameOncocenter = leerONCOCENTER()
-# dataFrameTEBCA = leerTEBCA() 
+dataFrameOncocenter = leerONCOCENTER()
+dataFrameTEBCA = leerTEBCA() 
 # adicionarInformacion(dataFrameFacturas, dataFrameFacturasMAPFRE, dataFrameOncocenter, dataFrameTEBCA)
 # leerGrupoArticulo()

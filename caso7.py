@@ -79,10 +79,10 @@ def recorrer_carpetas_y_extraer_pdfs(ruta):
                 print(f"Procesando archivo: {file}")
                 nombre_sin_extension = os.path.splitext(file)[0]
                 print(nombre_sin_extension.split('-'))
-                print(nombre_sin_extension.split('-')[0])
-                print(nombre_sin_extension.split('-')[1:-1])
-                
-                
+                sociedad_1 = nombre_sin_extension.split('-')[0]
+                detalle = ' '.join(nombre_sin_extension.split('-')[1:-1])
+                print(sociedad_1)
+                print(detalle)
                 try:
                     with pdfplumber.open(pdf_path) as pdf:
                         if es_pdf_sin_texto_seleccionable(pdf):
