@@ -129,13 +129,12 @@ def recorrer_carpetas_y_extraer_pdfs(ruta):
                             else:
                                 print("Estado del archivo: Fallo")
 
-                            sociedad, codigo = buscar_sociedad_y_codigo(all_text, sociedades_df)
-                            nuevo_nombre, proveedor, cod_proveedor, grupo_personal, imputacion, incluye = renombrar_pdf_y_validar(file, nuevos_nombres_df)
-                            datos.append([file, sociedad, codigo, 
+                            # sociedad, codigo = buscar_sociedad_y_codigo(all_text, sociedades_df)
+                            # nuevo_nombre, proveedor, cod_proveedor, grupo_personal, imputacion, incluye = renombrar_pdf_y_validar(file, nuevos_nombres_df)
+                            datos.append([sociedad_1,  detalle,
                                         datos_extraidos.get('prima'), 
                                         datos_extraidos.get('igv'), 
-                                        datos_extraidos.get('importe_total'), 
-                                        nuevo_nombre, proveedor, cod_proveedor, grupo_personal, imputacion, incluye])
+                                        datos_extraidos.get('importe_total')])
 
                         else:
                             print(f"No se pudo identificar la plantilla para el archivo: {file}")
@@ -174,46 +173,10 @@ except Exception as e:
 # Lista para almacenar los datos extraídos
 datos = []
 
-def limpiar_texto(text):
-    text = text.strip()  # Eliminar espacios al principio y final
-    text = re.sub(r'[^A-Z0-9\s.,:/]', '', text)  # Eliminar caracteres especiales, mantener solo letras mayúsculas, números y espacios
-    text = re.sub(r'\s+', ' ', text)  # Eliminar espacios múltiples
-    return text
-
-def buscar_sociedad_y_codigo(text, sociedades_df):
-    text = limpiar_texto(text)
-    for _, row in sociedades_df.iterrows():
-        sociedad = limpiar_texto(row['SOCIEDAD'])
-        if sociedad in text:
-            return row['SOCIEDAD'], row['CÓDIGO']
-    return "No identificado", "N/A"
-
-def renombrar_pdf_y_validar(file_name, nuevos_nombres_df):
-    if file_name.upper().startswith("F0"):
-        nuevo_nombre = file_name.replace(".pdf", "")
-    else:
-        nombre_sin_codigo = file_name.split("-", 1)[-1]
-        nombre_sin_codigo = limpiar_texto(nombre_sin_codigo.replace("pdf", "").strip())
-        nuevo_nombre = re.sub(r'\b\d{2}\.\d{2}\b', '', nombre_sin_codigo).strip()
-
-    nuevo_nombre = limpiar_texto(nuevo_nombre)
-
-    for _, row in nuevos_nombres_df.iterrows():
-        detalle = limpiar_texto(row['DETALLE'])
-
-        if nuevo_nombre == detalle:
-            proveedor = row['Proveedor']
-            cod_proveedor = row['Cod. Proveedor']
-            grupo_personal = row['Grupo de Personal']
-            imputacion = row['I']
-            incluye = row['Incluye']
-            return nuevo_nombre, proveedor, cod_proveedor, grupo_personal, imputacion, incluye
-
-    return nuevo_nombre, "N/A", "N/A", "N/A", "N/A", "N/A"
-
 # Ejecutar el proceso
 recorrer_carpetas_y_extraer_pdfs(ruta_principal)
 
 # Crear un DataFrame con los datos extraídos y mostrarlo
-df = pd.DataFrame(datos, columns=["Archivo", "Sociedad", "Código", "Prima", "IGV", "Importe Total", "DETALLE", "Proveedor", "Cod. Proveedor", "Grupo de Personal", "Imputacion", "Incluye"])
+df = pd.DataFrame(datos, columns=[ "Sociedad", "Detalle",  "Prima", "IGV", "Importe Total"])
+
 print(df)
