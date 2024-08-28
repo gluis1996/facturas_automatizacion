@@ -351,7 +351,7 @@ def leerGrupoArticulo():
                 detalleAuxuliarGrupo = ''.join(detalleAuxuliarGrupo)
 
                 print(detalleAuxiliar, detalleAuxuliarGrupo)
-                print(detalleAuxiliar, detalleAuxuliarGrupo, index2, fila['Sociedad'], fila2['Codigo de Sociedad'])
+                # print(detalleAuxiliar, detalleAuxuliarGrupo, index2, fila['Sociedad'], fila2['Codigo de Sociedad'])
                 if detalleAuxiliar == detalleAuxuliarGrupo:
                     fila['Detalle'].startswith(fila2['DETALLE'])
                     dataFrameFacturas.loc[index, 'Grupo Articulo'] = fila2['Grupo Artículo']
@@ -365,10 +365,10 @@ def leerGrupoArticulo():
     print(dataFrameFacturas)
     # dataFrameFacturas.to_excel(rutaRepositorioOS + '11 Generado\\Facturas.xlsx', index=False)
 
-dataFrameNuevosNombres = leerNuevosNombres()
-dataFrameFacturas = leerCarpetas()
-dataFrameFacturasMAPFRE = leerCarpetaMAPFRE()
-dataFrameOncocenter = leerONCOCENTER()
-dataFrameTEBCA = leerTEBCA() 
-# adicionarInformacion(dataFrameFacturas, dataFrameFacturasMAPFRE, dataFrameOncocenter, dataFrameTEBCA)
-# leerGrupoArticulo()
+# dataFrameNuevosNombres = leerNuevosNombres()
+# dataFrameFacturas = leerCarpetas()
+# dataFrameFacturasMAPFRE = leerCarpetaMAPFRE()
+# dataFrameOncocenter = leerONCOCENTER()
+# dataFrameTEBCA = leerTEBCA() 
+# # adicionarInformacion(dataFrameFacturas, dataFrameFacturasMAPFRE, dataFrameOncocenter, dataFrameTEBCA)
+leerGrupoArticulo()
